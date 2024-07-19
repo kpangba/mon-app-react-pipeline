@@ -1,0 +1,20 @@
+name: Build, Test et deploy
+
+on:
+  push:
+    branches:
+      - 'main'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cloner Code
+        uses: actions/checkout@v4
+      - name: Install Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - name: Install les packages npm du projet
+        run: npm install
+      - name: Builder
+        run: npm run build
