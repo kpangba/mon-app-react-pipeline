@@ -19,6 +19,7 @@ jobs:
       - name: Builder
         run: npm run build
   test:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Clone
@@ -31,6 +32,25 @@ jobs:
         run: npm install
       - name: Test
         run: npm run test
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cloner
+        uses: actions/checkout@v4
+      - name: Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - name: packages
+        run: npm install
+      - name: build
+        run: npm run build
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: build
+          branch: gh-pages
     
 
   
