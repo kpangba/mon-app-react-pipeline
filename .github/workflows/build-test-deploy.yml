@@ -18,3 +18,19 @@ jobs:
         run: npm install
       - name: Builder
         run: npm run build
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone
+        uses: actions/checkout@v4
+      - name: Install Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - name: Install packages
+        run: npm install
+      - name: Test
+        run: npm run test
+    
+
+  
